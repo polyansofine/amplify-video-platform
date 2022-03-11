@@ -1,0 +1,14 @@
+type Video @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  title: String!
+  description: String
+  order: Int
+  courseID: ID! @index(name: "byCourse")
+}
+
+type Course @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  title: String!
+  descriptioin: String
+  videos: [Video] @hasMany(indexName: "byCourse", fields: ["id"])
+}
